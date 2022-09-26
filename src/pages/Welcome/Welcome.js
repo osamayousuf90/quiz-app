@@ -41,14 +41,13 @@ const Welcome = () => {
   }, [running]);
     
   useEffect(() => {
-    if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length){
-      console.log("nothing");
-      setTimeout(() => {
+    if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length && selectedAns && point){
+      // setTimeout(() => {
         setViewImg(true)
-      }, 8200)
+      // }, 8200)
     } else {
       if (progress === 100 || point || rightAns) {
-        // setTimeout(() => {
+        setTimeout(() => {
           setProgress(0)
           setPoint("")
           setPreviousBtnBlock(true);
@@ -56,12 +55,11 @@ const Welcome = () => {
           setBtnBlocked(false);
           setSelectedAns("");
           setQuestionNumber((prev) => prev + 1);
-          setQuestionIndex((prev) => QuizQuestion[questionNumber])
-          clearInterval(interval);
-        // }, 400)
+          setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+        }, 1000)
       } 
     }
-  }, [progress , point]);
+  }, [point]);
 
    
 
@@ -79,7 +77,7 @@ const Welcome = () => {
 
   // next
   const next = () => {
-  if (point || selectedAns) {
+  if (!point || !selectedAns) {
       alert("Select ans first")
   } else {
     if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
@@ -154,7 +152,7 @@ const Welcome = () => {
             <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button> 
           </div>
         </div>
-      {/* <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/> */}
+      <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
 
       </div>
     </div>
