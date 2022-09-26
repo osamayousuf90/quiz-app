@@ -1,0 +1,140 @@
+.bgImg {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.418), rgb(0, 0, 0)), url("../../images/wp4676582-4k-pc-wallpapers.jpg") !important;
+    width: 100%;
+    min-height: 100vh;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size:contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &_inner {
+        position: relative;
+        height: 500px;
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(128, 128, 128, 0.377);
+        border-radius: 50px;
+    }
+
+    &_heading {
+        position: relative;
+        width: 80%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 50px;
+
+        h5 {
+            color: white;
+            font-size: 25px;
+        }
+    }
+
+    &_row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+
+
+    &_p1 {
+        position: relative;
+        padding: 50px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 50%;
+        height: 400px;
+
+        h5 {
+            color: white;
+            font-size: 30px !important;
+        }
+
+        p {
+            color: white;
+            font-size: 20px !important;
+            margin: 10px 0px;
+        }
+
+        span {
+            font-size: 20px !important;
+        }
+    }
+
+    &_p2 {
+        position: relative;
+        width: 50%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        
+
+        h5 {
+            margin: 40px 0px;
+            color: white;
+            font-size: 30px !important; 
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 80%;
+            height: 40px !important;
+            border: 1px solid white;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: rgba(128, 128, 128, 0.493);
+            border-radius: 5px;
+            margin: 10px 0px;
+        }
+
+        .rightAns {
+            background-color: green;
+            color: white;
+        }
+
+        .wrongAns {
+            background-color: red;
+            color: white; 
+        }
+    }
+
+    .next {
+        position: absolute !important;
+        top: 20px;
+        right: 40px;
+        z-index: 99;
+        cursor: pointer;
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+
+    .previous {
+        position: absolute !important;
+        top: 20px;
+        left: 40px;
+        z-index: 99;
+        cursor: pointer;
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+}
