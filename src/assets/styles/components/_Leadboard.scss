@@ -1,0 +1,90 @@
+.Leadboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    top: 0%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999 !important;
+    overflow: hidden !important;
+  
+    &_active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        position: absolute;
+        transform: scale(2);
+        left: 25%;
+        top: 22%;
+        opacity: 1;
+        height: 50vh;
+        transition: opacity 1000ms ease-in-out, top 700ms ease-in-out, transform 700ms ease-in;    
+    }        
+    
+    &_unactive {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        position: absolute;
+        top: -100%;
+        left: 25%;
+        height: 50vh;
+        width: 50%;
+        opacity:0;
+        transform: scale(0);
+        transition: opacity 700ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-out;
+    }
+
+    &_inner {
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+        width: 40% !important;
+        height: 220px !important;
+        position: relative;
+        background-color: white;
+        z-index: 999 !important;
+        border-radius: 20px;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.418), rgb(0, 0, 0)), url("../../images/Jungle1.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: hidden;
+
+        h4 {
+            color: white;
+            margin: 20px 0px;
+        }
+
+        h5 {
+            color: white;
+            font-size: 20px !important;
+        }
+
+        p {
+            color: white;
+        }
+    }
+
+    &_retry {
+        position: relative;
+        top: 20px;
+
+        button {
+            width: 120px;
+            height: 40px;
+            border: none;
+            font-size: 15px !important;
+            outline: none;
+            border-radius: 20px;
+            color: white;
+            background-color: grey;
+        }
+    }
+}

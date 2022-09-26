@@ -10,27 +10,8 @@
     justify-content: center;
     align-items: center;
 
-
-    .MuiMobileStepper-root {
-        display: flex;
-        padding: 8px;
-        background: #6d444400;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 0px 50px;
-    }
-
-    .MuiLinearProgress-colorPrimary {
-    background-color: rgba(86, 98, 176, 0);
-    }
-
-
-.MuiMobileStepper-progress {
-    width: 100%;
-}
-
     &_inner {
+        overflow: hidden;
         position: relative;
         height: 500px;
         width: 50%;
@@ -43,8 +24,12 @@
     }
 
     &_progressBar {
-        width: 100%;
-        height: 200px;
+        position: absolute;
+        top: 0px;
+        width: 120%;
+        padding: 0px 20px;
+        height: 80px;
+        z-index: 999;
     }
 
     
@@ -104,7 +89,7 @@
         height: 400px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         
 
@@ -151,6 +136,7 @@
         background-color: transparent;
         border: none;
         color: white;
+        z-index: 999;
     }
 
     .previous {
@@ -163,5 +149,6 @@
         background-color: transparent;
         border: none;
         color: white;
+        z-index: 999;
     }
 }

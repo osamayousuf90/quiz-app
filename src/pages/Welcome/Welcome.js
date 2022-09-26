@@ -4,7 +4,8 @@ import QuizQuestion from "../../APIS/QuizQuestion";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increase } from "../../Redux-Store/pointsSlice";
-import MobileStepper from "@material-ui/core/MobileStepper";
+import { ProgressBar } from 'react-bootstrap'
+import Leadboard from "../../components/Popups/Leadboard";
 
 
 
@@ -17,31 +18,52 @@ const Welcome = () => {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [point, setPoint] = useState("");
   const dispatch = useDispatch();
+  const [viewImg, setViewImg] = useState(false);
 
 
+  let interval = undefined;
 
-  const [progressCount, setCurrentStepCount] = React.useState(0);
-
+  const [running, setRunning] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   // getting redux values
   const { points } = useSelector((state) => state.points);
 
+    
+  useEffect(() => {
+    if (running) {
+      interval = setInterval(() => {
+        setProgress((prev) => prev + 1);
+      }, 150);
+    } else {
+      clearInterval(interval);
+    }
+  }, [running]);
+    
+  useEffect(() => {
+    if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length){
+      console.log("nothing");
+      setTimeout(() => {
+        setViewImg(true)
+      }, 8200)
+    } else {
+      if (progress === 100 || point || rightAns) {
+        // setTimeout(() => {
+          setProgress(0)
+          setPoint("")
+          setPreviousBtnBlock(true);
+          setRightAns(false);
+          setBtnBlocked(false);
+          setSelectedAns("");
+          setQuestionNumber((prev) => prev + 1);
+          setQuestionIndex((prev) => QuizQuestion[questionNumber])
+          clearInterval(interval);
+        // }, 400)
+      } 
+    }
+  }, [progress , point]);
 
-  
-  const stop = () => {
-    window.clearInterval(100)
-  }
-
-
-
-    window.setInterval(() => {
-    setCurrentStepCount((prevActiveStep) => prevActiveStep + 1);
-    }, 1000)
-
-
-
-
-  
+   
 
 
   // check ans is true or false
@@ -57,12 +79,13 @@ const Welcome = () => {
 
   // next
   const next = () => {
-  if (point === "") {
+  if (point || selectedAns) {
       alert("Select ans first")
   } else {
     if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
       return false;
     } else {
+      setProgress(0)
       setPoint("")
       setPreviousBtnBlock(true);
       setRightAns(false);
@@ -70,7 +93,6 @@ const Welcome = () => {
       setSelectedAns("");
       setQuestionNumber((prev) => prev + 1);
       setQuestionIndex((prev) => QuizQuestion[questionNumber]);
-      // setCurrentStepCount((prevActiveStep) => prevActiveStep + 1);
     }
     }
  
@@ -86,19 +108,28 @@ const Welcome = () => {
       setSelectedAns("");
       setQuestionNumber((prev) => prev - 1);
       setQuestionIndex((prev) => QuizQuestion[questionNumber - 1]);
-      // setCurrentStepCount((prevActiveStep) => prevActiveStep - 1);
     }
   };
+
+
+  const reset = () => {
+    console.log("clicked")
+    setProgress(0)
+    setRunning(false)
+    clearInterval(interval);
+    // setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+    setViewImg(false)
+  }
 
   return (
     <div>
       <div className="bgImg">
         <div className="bgImg_inner">
-          <div className="bgImg_progressBar">
-          <MobileStepper className="prog" steps={50} activeStep={progressCount} position="static" variant="progress"/>
-          </div>
-          <div className="bgImg_heading">
+          {/* <div className="bgImg_heading">
             <h5>Quiz Game</h5>
+          </div> */}
+          <div className="bgImg_progressBar">
+            <ProgressBar now={progress} variant="success"/>
           </div>
 
           <div className="bgImg_row">
@@ -123,7 +154,8 @@ const Welcome = () => {
             <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button> 
           </div>
         </div>
-        <button onClick={() => stop()}>Stop</button>
+      {/* <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/> */}
+
       </div>
     </div>
   );
