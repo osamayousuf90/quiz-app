@@ -10,6 +10,26 @@
     justify-content: center;
     align-items: center;
 
+
+    .MuiMobileStepper-root {
+        display: flex;
+        padding: 8px;
+        background: #6d444400;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0px 50px;
+    }
+
+    .MuiLinearProgress-colorPrimary {
+    background-color: rgba(86, 98, 176, 0);
+    }
+
+
+.MuiMobileStepper-progress {
+    width: 100%;
+}
+
     &_inner {
         position: relative;
         height: 500px;
@@ -21,6 +41,13 @@
         background-color: rgba(128, 128, 128, 0.377);
         border-radius: 50px;
     }
+
+    &_progressBar {
+        width: 100%;
+        height: 200px;
+    }
+
+    
 
     &_heading {
         position: relative;

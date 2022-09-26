@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import QuizQuestion from "../../APIS/QuizQuestion";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { increase } from "../../Redux-Store/pointsSlice";
+import MobileStepper from "@material-ui/core/MobileStepper";
+
 
 
 const Welcome = () => {
@@ -10,13 +15,40 @@ const Welcome = () => {
   const [btnBlocked, setBtnBlocked] = useState(false);
   const [previousBtnBlock, setPreviousBtnBlock] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [points, setPoints] = useState("");
+  const [point, setPoint] = useState("");
+  const dispatch = useDispatch();
+
+
+
+  const [progressCount, setCurrentStepCount] = React.useState(0);
+
+
+  // getting redux values
+  const { points } = useSelector((state) => state.points);
+
+
+  
+  const stop = () => {
+    window.clearInterval(100)
+  }
+
+
+
+    window.setInterval(() => {
+    setCurrentStepCount((prevActiveStep) => prevActiveStep + 1);
+    }, 1000)
+
+
+
+
+  
 
 
   // check ans is true or false
   const checkIfTrue = (index) => {
     setRightAns(true);
     setBtnBlocked(true);
+    dispatch(increase( point ))
     if (index === selectedAns) {
       setBtnBlocked(true);
       setRightAns(true);
@@ -25,18 +57,20 @@ const Welcome = () => {
 
   // next
   const next = () => {
-  if (points === "") {
+  if (point === "") {
       alert("Select ans first")
   } else {
     if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
       return false;
     } else {
+      setPoint("")
       setPreviousBtnBlock(true);
       setRightAns(false);
       setBtnBlocked(false);
       setSelectedAns("");
       setQuestionNumber((prev) => prev + 1);
       setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+      // setCurrentStepCount((prevActiveStep) => prevActiveStep + 1);
     }
     }
  
@@ -52,6 +86,7 @@ const Welcome = () => {
       setSelectedAns("");
       setQuestionNumber((prev) => prev - 1);
       setQuestionIndex((prev) => QuizQuestion[questionNumber - 1]);
+      // setCurrentStepCount((prevActiveStep) => prevActiveStep - 1);
     }
   };
 
@@ -59,6 +94,9 @@ const Welcome = () => {
     <div>
       <div className="bgImg">
         <div className="bgImg_inner">
+          <div className="bgImg_progressBar">
+          <MobileStepper className="prog" steps={50} activeStep={progressCount} position="static" variant="progress"/>
+          </div>
           <div className="bgImg_heading">
             <h5>Quiz Game</h5>
           </div>
@@ -75,16 +113,17 @@ const Welcome = () => {
             <div className="bgImg_p2">
               <h5>Choose The Answer</h5>
 
-              {questionIndex?.answers?.map((res, index) => {
+              {questionIndex?.answers?.map((res, index , key) => {
                 return (
-                  <button disabled={btnBlocked} className={(rightAns === true && res?.isCorrect === true && "rightAns") || (selectedAns === index && "wrongAns")} onClick={() => { setSelectedAns(index); checkIfTrue(index); setPoints(res?.points) }}>{res?.ansText}</button>
+                  <button key={key.points} disabled={btnBlocked} className={rightAns === true && res?.isCorrect === true && "rightAns" || selectedAns === index && "wrongAns"} onClick={() => { setSelectedAns(index); checkIfTrue(index); setPoint(res?.points) }}>{res?.ansText}</button>
                 )
               })}
             </div>
-            <button className="next" onClick={() => next()}><i class="fa-solid fa-arrow-right"></i></button>
-            <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i class="fa-solid fa-arrow-left"></i></button> 
+            <button className="next" onClick={() => next()}><i className="fa-solid fa-arrow-right"></i></button>
+            <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button> 
           </div>
         </div>
+        <button onClick={() => stop()}>Stop</button>
       </div>
     </div>
   );
