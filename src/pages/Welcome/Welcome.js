@@ -81,7 +81,7 @@ const Welcome = () => {
                 )
               })}
             </div>
-            <button className="next" onClick={() => next()}><i class="fa-solid fa-arrow-right"></i></button>
+            {/* <button className="next" onClick={() => next()}><i class="fa-solid fa-arrow-right"></i></button> */}
             <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i class="fa-solid fa-arrow-left"></i></button> 
           </div>
         </div>
