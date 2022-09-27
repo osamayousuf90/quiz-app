@@ -50,30 +50,21 @@ const Welcome = () => {
       if (wrongAns && rightAns) {
         setViewImg(true)
       } 
-    } else {      
-      console.log("moving to the Question");
+    } 
+    
+    if (!rightAns && !wrongAns) {
+      console.log("wait because ans is not given yet so moving on");
+    }
+
+    if(rightAns && wrongAns) {      
       setTimeout(() => {
       next()
-      }, 7500)
-      }
-
-    // setTimeout(() => {
-    //    setWrongAns(true)
-    // }, 7600)
-    
-    // if (!point && !wrongAns) {
-    //   console.log("wait because ans is not given yet so moving on");
-    // } else {      
-    // setTimeout(() => {
-    // next()
-    // console.log("Moved On Succesfully");  
-    // }, 2000)
-    // }
+      console.log("Moved On Succesfully");  
+      }, 2000)
+    }
 
 
-
-  }, [point , wrongAns ]);
-
+  }, [point , wrongAns , rightAns ]);
 
 
   
@@ -92,7 +83,7 @@ const Welcome = () => {
   };
 
   // next
-  const next = () => {
+  const next = (e) => {
     if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
       return false;
     } else {
@@ -127,7 +118,7 @@ const Welcome = () => {
     setProgress(0)
     setRunning(false)
     clearInterval(interval);
-    // setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+    setQuestionIndex((prev) => QuizQuestion[0]);
     setViewImg(false)
   }
 
