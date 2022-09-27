@@ -42,32 +42,35 @@ const Welcome = () => {
     } 
   }, [running]);
     
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("setting true for moving")
-       setWrongAns(true)
-    }, 7600)
-    if (!point || !wrongAns) {
-      console.log("nothing");
-    } else {      
-    setTimeout(() => {
-    next()
-    }, 2000)
-    console.log("100%");
-    }
 
-      if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point && !wrongAns) {
-      if (point || wrongAns) {
-       setViewImg(true)
+
+  useEffect(() => {
+  
+    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
+      if (wrongAns && rightAns) {
+        setViewImg(true)
       } 
-    }
-      else {      
-        console.log("down hit");
-    setTimeout(() => {
+    } else {      
+      console.log("moving to the Question");
+      setTimeout(() => {
       next()
-    }, 2000)
-    console.log("100%");
-    }
+      }, 7500)
+      }
+
+    // setTimeout(() => {
+    //    setWrongAns(true)
+    // }, 7600)
+    
+    // if (!point && !wrongAns) {
+    //   console.log("wait because ans is not given yet so moving on");
+    // } else {      
+    // setTimeout(() => {
+    // next()
+    // console.log("Moved On Succesfully");  
+    // }, 2000)
+    // }
+
+
 
   }, [point , wrongAns ]);
 
