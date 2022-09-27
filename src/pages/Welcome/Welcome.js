@@ -43,15 +43,19 @@ const Welcome = () => {
   }, [running]);
     
   useEffect(() => {
-    if (!point && !wrongAns) {
-      console.log("up hit");
-      setTimeout(() => {
-        console.log("time hit")
-        next()        
-        // setQuestionNumber((prev) => prev + 1);
-        // setQuestionIndex((prev) => QuizQuestion[questionNumber]);
-      }, 7500)
+    setTimeout(() => {
+      console.log("setting true for moving")
+       setWrongAns(true)
+    }, 7600)
+    if (!point || !wrongAns) {
+      console.log("nothing");
+    } else {      
+    setTimeout(() => {
+    next()
+    }, 2000)
+    console.log("100%");
     }
+
       if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point && !wrongAns) {
       if (point || wrongAns) {
        setViewImg(true)
