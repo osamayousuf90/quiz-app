@@ -9,7 +9,6 @@ const initialState = {
     initialState,
     reducers: {
         increase: (state, action) => {
-        console.log("action payload ------>", action.payload)
         state.points = (action.payload);
       },
     }

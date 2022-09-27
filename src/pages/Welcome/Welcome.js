@@ -6,12 +6,14 @@ import { useDispatch } from "react-redux";
 import { increase } from "../../Redux-Store/pointsSlice";
 import { ProgressBar } from 'react-bootstrap'
 import Leadboard from "../../components/Popups/Leadboard";
+import { selectClasses } from "@mui/material";
 
 
 
 const Welcome = () => {
   const [questionIndex, setQuestionIndex] = useState(QuizQuestion[0]);
   const [rightAns, setRightAns] = useState(false);
+  const [wrongAns, setWrongAns] = useState(false);
   const [selectedAns, setSelectedAns] = useState();
   const [btnBlocked, setBtnBlocked] = useState(false);
   const [previousBtnBlock, setPreviousBtnBlock] = useState(false);
@@ -36,18 +38,19 @@ const Welcome = () => {
         setProgress((prev) => prev + 1);
       }, 150);
     } else {
-      clearInterval(interval);
-    }
+      clearInterval(interval)
+    } 
   }, [running]);
     
   useEffect(() => {
-    if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length && selectedAns && point){
-      // setTimeout(() => {
-        setViewImg(true)
-      // }, 8200)
-    } else {
-      if (progress === 100 || point || rightAns) {
-        setTimeout(() => {
+    if (questionNumber === QuizQuestion.length || point || wrongAns) {
+      if (point || wrongAns) {
+       setViewImg(true)
+      } 
+      }
+    else {
+      if (progress === 100 || !point || !wrongAns) {
+        if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length) {
           setProgress(0)
           setPoint("")
           setPreviousBtnBlock(true);
@@ -56,13 +59,19 @@ const Welcome = () => {
           setSelectedAns("");
           setQuestionNumber((prev) => prev + 1);
           setQuestionIndex((prev) => QuizQuestion[questionNumber]);
-        }, 1000)
-      } 
+        } else {
+          setTimeout(() => {
+            next()
+            }, 8000)
+         }
+     
+      }
     }
   }, [point]);
 
-   
 
+
+  
 
   // check ans is true or false
   const checkIfTrue = (index) => {
@@ -72,14 +81,12 @@ const Welcome = () => {
     if (index === selectedAns) {
       setBtnBlocked(true);
       setRightAns(true);
+      setWrongAns(true);
     }
   };
 
   // next
   const next = () => {
-  if (!point || !selectedAns) {
-      alert("Select ans first")
-  } else {
     if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
       return false;
     } else {
@@ -92,8 +99,6 @@ const Welcome = () => {
       setQuestionNumber((prev) => prev + 1);
       setQuestionIndex((prev) => QuizQuestion[questionNumber]);
     }
-    }
- 
   };
 
   // previous
@@ -111,7 +116,7 @@ const Welcome = () => {
 
 
   const reset = () => {
-    console.log("clicked")
+    console.log("reset")
     setProgress(0)
     setRunning(false)
     clearInterval(interval);
