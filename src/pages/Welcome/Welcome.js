@@ -43,27 +43,23 @@ const Welcome = () => {
   }, [running]);
     
   useEffect(() => {
-    if (questionNumber === QuizQuestion.length || point || wrongAns) {
-      if (point || wrongAns) {
+    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point) {
+      if (point) {
        setViewImg(true)
       } 
       }
-    else {
-      if (progress === 100 || !point || !wrongAns) {
-        if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length) {
+     else {
+      if (progress === 100 || !point) {
+        if (questionNumber === QuizQuestion.length) {
           setProgress(0)
           setPoint("")
           setPreviousBtnBlock(true);
           setRightAns(false);
           setBtnBlocked(false);
           setSelectedAns("");
-          setQuestionNumber((prev) => prev + 1);
+          setQuestionNumber((prev) => prev - 1);
           setQuestionIndex((prev) => QuizQuestion[questionNumber]);
-        } else {
-          setTimeout(() => {
-            next()
-            }, 8000)
-         }
+        } 
      
       }
     }
