@@ -43,27 +43,29 @@ const Welcome = () => {
   }, [running]);
     
   useEffect(() => {
-    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point && !wrongAns) {
+    if (!point && !wrongAns) {
+      console.log("up hit");
+      setTimeout(() => {
+        console.log("time hit")
+        next()        
+        // setQuestionNumber((prev) => prev + 1);
+        // setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+      }, 7500)
+    }
+      if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point && !wrongAns) {
       if (point || wrongAns) {
        setViewImg(true)
       } 
-      }
-     else {
-      // if (progress === 100) {
-      //   console.log("progress 100%");
-      //   if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      //     setTimeout(() => {
-      //       next()
-      //     }, 3000)
-      //   } 
-     
-      // }
-      setTimeout(() => {
-        next()
-      }, 2000)
-      console.log("100%");
     }
-  }, [point]);
+      else {      
+        console.log("down hit");
+    setTimeout(() => {
+      next()
+    }, 2000)
+    console.log("100%");
+    }
+
+  }, [point , wrongAns ]);
 
 
 
