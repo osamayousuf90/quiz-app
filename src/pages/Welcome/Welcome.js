@@ -58,6 +58,9 @@ const Welcome = () => {
       //   } 
      
       // }
+      setTimeout(() => {
+        next()
+      }, 2000)
       console.log("100%");
     }
   }, [point]);
