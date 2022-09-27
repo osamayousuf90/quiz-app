@@ -43,25 +43,22 @@ const Welcome = () => {
   }, [running]);
     
   useEffect(() => {
-    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point) {
-      if (point) {
+    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length || !point && !wrongAns) {
+      if (point || wrongAns) {
        setViewImg(true)
       } 
       }
      else {
-      if (progress === 100 || !point) {
-        if (questionNumber === QuizQuestion.length) {
-          setProgress(0)
-          setPoint("")
-          setPreviousBtnBlock(true);
-          setRightAns(false);
-          setBtnBlocked(false);
-          setSelectedAns("");
-          setQuestionNumber((prev) => prev - 1);
-          setQuestionIndex((prev) => QuizQuestion[questionNumber]);
-        } 
+      // if (progress === 100) {
+      //   console.log("progress 100%");
+      //   if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
+      //     setTimeout(() => {
+      //       next()
+      //     }, 3000)
+      //   } 
      
-      }
+      // }
+      console.log("100%");
     }
   }, [point]);
 
@@ -73,6 +70,7 @@ const Welcome = () => {
   const checkIfTrue = (index) => {
     setRightAns(true);
     setBtnBlocked(true);
+    setWrongAns(true)
     dispatch(increase( point ))
     if (index === selectedAns) {
       setBtnBlocked(true);
@@ -90,6 +88,7 @@ const Welcome = () => {
       setPoint("")
       setPreviousBtnBlock(true);
       setRightAns(false);
+      setWrongAns(false);
       setBtnBlocked(false);
       setSelectedAns("");
       setQuestionNumber((prev) => prev + 1);
