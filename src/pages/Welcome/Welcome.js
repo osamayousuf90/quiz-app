@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { increase } from "../../Redux-Store/pointsSlice";
 import { ProgressBar } from 'react-bootstrap'
 import Leadboard from "../../components/Popups/Leadboard";
-import { selectClasses } from "@mui/material";
+
 
 
 
@@ -21,8 +21,7 @@ const Welcome = () => {
   const [point, setPoint] = useState("");
   const dispatch = useDispatch();
   const [viewImg, setViewImg] = useState(false);
-
-
+  
   let interval = undefined;
 
   const [running, setRunning] = useState(true);
@@ -35,7 +34,7 @@ const Welcome = () => {
   useEffect(() => {
     if (running) {
       interval = setInterval(() => {
-        setProgress((prev) => prev + 1);
+        setProgress((prev) => prev + 3);
       }, 150);
     } else {
       clearInterval(interval)
@@ -52,19 +51,26 @@ const Welcome = () => {
       } 
     } 
     
+
     if (!rightAns && !wrongAns) {
-      console.log("wait because ans is not given yet so moving on");
-    }
+      console.log("wait because ans is not given yet will move on")
+      setTimeout(() => {
+        next()
+      }, 5000)
+    } 
+    
 
     if(rightAns && wrongAns) {      
       setTimeout(() => {
       next()
       console.log("Moved On Succesfully");  
-      }, 2000)
+      }, 1800)
     }
 
+  }, [rightAns, wrongAns , questionIndex]);
+  
 
-  }, [point , wrongAns , rightAns ]);
+  
 
 
   
@@ -84,7 +90,7 @@ const Welcome = () => {
 
   // next
   const next = (e) => {
-    if (questionNumber === QuizQuestion.length ||questionNumber >= QuizQuestion.length){
+    if (questionNumber === QuizQuestion.length || questionNumber >= QuizQuestion.length) {
       return false;
     } else {
       setProgress(0)
@@ -95,7 +101,8 @@ const Welcome = () => {
       setBtnBlocked(false);
       setSelectedAns("");
       setQuestionNumber((prev) => prev + 1);
-      setQuestionIndex((prev) => QuizQuestion[questionNumber]);
+      setQuestionIndex(() => QuizQuestion[questionNumber]);
+      setRunning(false)
     }
   };
 
@@ -125,6 +132,7 @@ const Welcome = () => {
     setViewImg(false)
     setQuestionNumber(1);
     setQuestionIndex(QuizQuestion[0]);
+    setRunning(false)
 
   }
 
@@ -157,7 +165,7 @@ const Welcome = () => {
                 )
               })}
             </div>
-            <button className="next" onClick={() => next()}><i className="fa-solid fa-arrow-right"></i></button>
+            <button className="next" onClick={(e) => next(e)}><i className="fa-solid fa-arrow-right"></i></button>
             <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button> 
           </div>
         </div>
