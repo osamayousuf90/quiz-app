@@ -1,0 +1,37 @@
+.AreYouReady {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.418), rgb(0, 0, 0)), url("../../images/wp4676582-4k-pc-wallpapers.jpg") !important;
+    width: 100%;
+    min-height: 100vh;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size:contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &_inner {
+        overflow: hidden;
+        position: relative;
+        height: 500px;
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(128, 128, 128, 0.377);
+        border-radius: 50px;
+    }
+
+
+    &_heading {
+        position: relative;
+        width: 80%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 50px;
+    }
+    
+}

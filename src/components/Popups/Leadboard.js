@@ -7,7 +7,7 @@ const Leadboard = ({viewImg , setViewImg , reset}) => {
 
     const clickOutSide = (e) => {
     if (!imgRef.current.contains(e.target)) {
-    setViewImg(false)  
+      setViewImg(false)  
     } 
   }
 
@@ -18,7 +18,7 @@ const Leadboard = ({viewImg , setViewImg , reset}) => {
 
   return (
     <div>
-    <div className={viewImg === true ? "Leadboard Leadboard_active" : "Leadboard Leadboard_unactive"} >
+    <div onClick={() => reset()} className={viewImg === true ? "Leadboard Leadboard_active" : "Leadboard Leadboard_unactive"} >
         <div ref={imgRef} onClick={(e) => clickOutSide(e)} className="Leadboard_inner">
           <h4>Leadboard</h4>  
           <p>Your Score "<b>50</b>"</p>

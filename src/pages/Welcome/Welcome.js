@@ -24,7 +24,7 @@ const Welcome = () => {
   
   let interval = undefined;
 
-  const [running, setRunning] = useState(true);
+  const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState(0);
 
   // getting redux values
@@ -54,7 +54,6 @@ const Welcome = () => {
     if (rightAns && wrongAns) {     
       setTimeout(() => {
       if (questionNumber === QuizQuestion.length) {
-        console.log("nothing to move")
       } else {
        next()     
       }
@@ -65,11 +64,16 @@ const Welcome = () => {
   
 
   useEffect(() => {
-    if (progress >= 100) {
+    if(questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
+      setRunning(false)
+      setTimeout(() => {
+      setViewImg(true)
+      }, 5000)
+   }else if (progress >= 100) {
       clearInterval(interval);
       setProgress(0);
       next();
-     }
+    }
    }, [progress])
   
 
@@ -122,7 +126,6 @@ const Welcome = () => {
 
 
   const reset = () => {
-    console.log("reset")
     setProgress(0)
     setPoint("")
     setPreviousBtnBlock(true);
@@ -134,11 +137,11 @@ const Welcome = () => {
     setQuestionNumber(1);
     setQuestionIndex(QuizQuestion[0]);
     setRunning(false)
-
   }
 
   return (
     <div>
+      
       <div className="bgImg">
         <div className="bgImg_inner">
           {/* <div className="bgImg_heading">
@@ -169,9 +172,9 @@ const Welcome = () => {
             {/* <button className="next" onClick={(e) => next(e)}><i className="fa-solid fa-arrow-right"></i></button> */}
             {/* <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button>  */}
           </div>
+          <button onClick={() => setRunning(true)}>Start</button>
         </div>
-      <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
-
+       <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
       </div>
     </div>
   );
