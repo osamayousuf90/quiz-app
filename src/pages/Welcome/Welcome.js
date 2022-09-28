@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { increase } from "../../Redux-Store/pointsSlice";
 import { ProgressBar } from 'react-bootstrap'
 import Leadboard from "../../components/Popups/Leadboard";
+import AreYouReady from "../../components/Popups/AreYouReady";
 
 
 
@@ -21,6 +22,8 @@ const Welcome = () => {
   const [point, setPoint] = useState("");
   const dispatch = useDispatch();
   const [viewImg, setViewImg] = useState(false);
+
+  const [gameStart , setGameStart] = useState(false)
   
   let interval = undefined;
 
@@ -49,7 +52,6 @@ const Welcome = () => {
         setViewImg(true)
       } 
     } 
-
 
     if (rightAns && wrongAns) {     
       setTimeout(() => {
@@ -141,12 +143,9 @@ const Welcome = () => {
 
   return (
     <div>
-      
+
       <div className="bgImg">
-        <div className="bgImg_inner">
-          {/* <div className="bgImg_heading">
-            <h5>Quiz Game</h5>
-          </div> */}
+        {gameStart === false ? <AreYouReady  setRunning={setRunning} setGameStart={setGameStart} /> : <div className="bgImg_inner">
           <div className="bgImg_progressBar">
             <ProgressBar now={progress} variant="success"/>
           </div>
@@ -169,11 +168,9 @@ const Welcome = () => {
                 )
               })}
             </div>
-            {/* <button className="next" onClick={(e) => next(e)}><i className="fa-solid fa-arrow-right"></i></button> */}
-            {/* <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button>  */}
           </div>
-          <button onClick={() => setRunning(true)}>Start</button>
-        </div>
+        </div> }
+ 
        <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
       </div>
     </div>

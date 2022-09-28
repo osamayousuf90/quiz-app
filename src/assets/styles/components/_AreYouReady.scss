@@ -1,5 +1,5 @@
 .AreYouReady {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.418), rgb(0, 0, 0)), url("../../images/wp4676582-4k-pc-wallpapers.jpg") !important;
+    // background: linear-gradient(0deg, rgba(0, 0, 0, 0.418), rgb(0, 0, 0)), url("../../images/wp4676582-4k-pc-wallpapers.jpg") !important;
     width: 100%;
     min-height: 100vh;
     background-position:center;
@@ -14,7 +14,7 @@
         overflow: hidden;
         position: relative;
         height: 500px;
-        width: 50%;
+        width: 250% !important;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -26,12 +26,36 @@
 
     &_heading {
         position: relative;
-        width: 80%;
+        width: 150%;
         height: 200px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 0px 50px;
+
+
+        h5 {
+            color: white;
+            font-size: 50px;
+            margin: 50px 0px;
+        }
+
+        p {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;  
+        }
+    }
+
+    button {
+        background-color: rgba(255, 255, 255, 0.322);
+        border-radius: 20px;
+        height: 40px;
+        width: 60%;
+        color: white;
+        border: none;
+        outline: none;
     }
     
 }
