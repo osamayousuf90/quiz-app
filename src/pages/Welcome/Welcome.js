@@ -73,9 +73,14 @@ const Welcome = () => {
        next()     
       }
       }, 800)
+    } else {
+      setTimeout(() => {
+        next()
+      }, 5000);
+      console.log("why so fast bro");
     }
 
-  }, [rightAns, wrongAns ]);
+  }, [rightAns, wrongAns , questionIndex]);
   
 
   
