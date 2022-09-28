@@ -24,7 +24,7 @@ const Welcome = () => {
   
   let interval = undefined;
 
-  const [running, setRunning] = useState(true);
+  const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState(0);
 
   // getting redux values
@@ -73,12 +73,7 @@ const Welcome = () => {
        next()     
       }
       }, 800)
-    } else {
-      setTimeout(() => {
-        next()
-      }, 5000);
-      console.log("why so fast bro");
-    }
+    } 
 
   }, [rightAns, wrongAns , questionIndex]);
   
@@ -93,6 +88,9 @@ const Welcome = () => {
     setRightAns(true);
     setBtnBlocked(true);
     setWrongAns(true)
+    setProgress(0);
+    clearInterval(interval);
+    setRunning(false);
     dispatch(increase( point ))
     if (index === selectedAns) {
       setBtnBlocked(true);
@@ -108,6 +106,8 @@ const Welcome = () => {
     } else {
       setProgress(0)
       setPoint("")
+      clearInterval(interval);
+      setRunning(false);
       setPreviousBtnBlock(true);
       setRightAns(false);
       setWrongAns(false);
@@ -183,7 +183,7 @@ const Welcome = () => {
           </div>
         </div>
       <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
-
+        <button onClick={() => setRunning(!running)}>Stop</button>
       </div>
     </div>
   );
