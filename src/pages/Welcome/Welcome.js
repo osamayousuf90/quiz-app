@@ -24,7 +24,7 @@ const Welcome = () => {
   
   let interval = undefined;
 
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState(true);
   const [progress, setProgress] = useState(0);
 
   // getting redux values
@@ -44,26 +44,12 @@ const Welcome = () => {
 
 
   useEffect(() => {
-  
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
       if (wrongAns && rightAns) {
         setViewImg(true)
       } 
     } 
-    
 
-    // if (!rightAns && !wrongAns) {
-    //   console.log("wait because ans is not given yet will move on")
-    //   if (questionNumber === QuizQuestion.length) {
-    //     console.log("nothing to move yooo")
-    //   } else {
-    //     setTimeout(() => {
-    //       next()
-    //      }, 5000)
-    //   }
- 
-    // } 
-    
 
     if (rightAns && wrongAns) {     
       setTimeout(() => {
@@ -73,14 +59,18 @@ const Welcome = () => {
        next()     
       }
       }, 800)
-    } 
+    }
 
   }, [rightAns, wrongAns , questionIndex]);
   
 
-  
-
-
+  useEffect(() => {
+    if (progress >= 100) {
+      clearInterval(interval);
+      setProgress(0);
+      next();
+     }
+   }, [progress])
   
 
   // check ans is true or false
@@ -90,7 +80,7 @@ const Welcome = () => {
     setWrongAns(true)
     setProgress(0);
     clearInterval(interval);
-    setRunning(false);
+    setRunning(false)
     dispatch(increase( point ))
     if (index === selectedAns) {
       setBtnBlocked(true);
@@ -106,8 +96,6 @@ const Welcome = () => {
     } else {
       setProgress(0)
       setPoint("")
-      clearInterval(interval);
-      setRunning(false);
       setPreviousBtnBlock(true);
       setRightAns(false);
       setWrongAns(false);
@@ -178,12 +166,12 @@ const Welcome = () => {
                 )
               })}
             </div>
-            <button className="next" onClick={(e) => next(e)}><i className="fa-solid fa-arrow-right"></i></button>
-            <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button> 
+            {/* <button className="next" onClick={(e) => next(e)}><i className="fa-solid fa-arrow-right"></i></button> */}
+            {/* <button className="previous" onClick={() => previous()} disabled={previousBtnBlock}><i className="fa-solid fa-arrow-left"></i></button>  */}
           </div>
         </div>
       <Leadboard reset={reset} setViewImg={setViewImg} viewImg={viewImg}/>
-        <button onClick={() => setRunning(!running)}>Stop</button>
+
       </div>
     </div>
   );
