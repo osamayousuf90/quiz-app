@@ -116,10 +116,16 @@ const Welcome = () => {
   const reset = () => {
     console.log("reset")
     setProgress(0)
-    setRunning(false)
-    clearInterval(interval);
-    setQuestionIndex((prev) => QuizQuestion[0]);
+    setPoint("")
+    setPreviousBtnBlock(true);
+    setRightAns(false);
+    setWrongAns(false);
+    setBtnBlocked(false);
+    setSelectedAns("");
     setViewImg(false)
+    setQuestionNumber(1);
+    setQuestionIndex(QuizQuestion[0]);
+
   }
 
   return (
