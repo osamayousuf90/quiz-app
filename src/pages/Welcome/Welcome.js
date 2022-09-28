@@ -52,22 +52,30 @@ const Welcome = () => {
     } 
     
 
-    if (!rightAns && !wrongAns) {
-      console.log("wait because ans is not given yet will move on")
-      setTimeout(() => {
-        next()
-      }, 5000)
-    } 
+    // if (!rightAns && !wrongAns) {
+    //   console.log("wait because ans is not given yet will move on")
+    //   if (questionNumber === QuizQuestion.length) {
+    //     console.log("nothing to move yooo")
+    //   } else {
+    //     setTimeout(() => {
+    //       next()
+    //      }, 5000)
+    //   }
+ 
+    // } 
     
 
-    if(rightAns && wrongAns) {      
+    if (rightAns && wrongAns) {     
       setTimeout(() => {
-      next()
-      console.log("Moved On Succesfully");  
-      }, 1800)
+      if (questionNumber === QuizQuestion.length) {
+        console.log("nothing to move")
+      } else {
+       next()     
+      }
+      }, 800)
     }
 
-  }, [rightAns, wrongAns , questionIndex]);
+  }, [rightAns, wrongAns ]);
   
 
   
