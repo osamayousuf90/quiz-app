@@ -66,11 +66,19 @@ const Welcome = () => {
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
       console.log("its to go now peacefully")
       setTimeout(() => {
-      setProgress(0)
-      clearInterval(interval)  
-      setRunning(false)
-      setViewImg(true)  
-      }, 2000)
+        setViewImg(true);
+        setProgress(0)
+        setPoint("")
+        setPreviousBtnBlock(true);
+        setRightAns(false);
+        setWrongAns(false);
+        setBtnBlocked(false);
+        setSelectedAns("");
+        setViewImg(false)
+        setQuestionNumber(1);
+        setQuestionIndex(QuizQuestion[0]);
+        setRunning(false)
+      }, 5000)
     } else if (progress >= 100) {
       console.log("time to move")
       clearInterval(interval);
@@ -78,7 +86,7 @@ const Welcome = () => {
       next();
       setRunning(false)
     }
-   }, [running])
+   }, [progress])
   
 
   // check ans is true or false
