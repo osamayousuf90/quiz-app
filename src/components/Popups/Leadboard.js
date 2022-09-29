@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRef , useEffect } from 'react'
 
 
-const Leadboard = ({viewImg , setViewImg , reset}) => {
+const Leadboard = ({viewImg , setViewImg , reset , setGameStart}) => {
   const imgRef = useRef();
 
     const clickOutSide = (e) => {
@@ -18,7 +18,7 @@ const Leadboard = ({viewImg , setViewImg , reset}) => {
 
   return (
     <div>
-    <div onClick={() => reset()} className={viewImg === true ? "Leadboard Leadboard_active" : "Leadboard Leadboard_unactive"} >
+      <div onClick={() => {   setViewImg(false)  ; reset() }} className={viewImg === true ? "Leadboard Leadboard_active" : "Leadboard Leadboard_unactive"} >
         <div ref={imgRef} onClick={(e) => clickOutSide(e)} className="Leadboard_inner">
           <h4>Leadboard</h4>  
           <p>Your Score "<b>50</b>"</p>
