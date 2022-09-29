@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import QuizQuestion from "../../APIS/QuizQuestion";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increase } from "../../Redux-Store/pointsSlice";
 import { ProgressBar } from 'react-bootstrap'
 import Leadboard from "../../components/Popups/Leadboard";
 import AreYouReady from "../../components/Popups/AreYouReady";
+import { useSelector } from "react-redux";
 
 
 
@@ -19,7 +19,7 @@ const Welcome = () => {
   const [btnBlocked, setBtnBlocked] = useState(false);
   const [previousBtnBlock, setPreviousBtnBlock] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [point, setPoint] = useState("");
+  const [point, setPoint] = useState();
   const dispatch = useDispatch();
   const [viewImg, setViewImg] = useState(false);
 
@@ -30,9 +30,11 @@ const Welcome = () => {
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // getting redux values
-  const { points } = useSelector((state) => state.points);
-
+     // getting redux values
+     const { points } = useSelector((state) => state.points);
+  
+  
+    
     
   useEffect(() => {
     if (running) {
@@ -73,7 +75,7 @@ const Welcome = () => {
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
       setTimeout(() => {
         setViewImg(true);
-        clearInterval(interval)
+        // clearInterval(interval)
       }, 5000)
     } else if (progress >= 100) {
       clearInterval(interval);
@@ -105,7 +107,7 @@ const Welcome = () => {
       return false;
     } else {
       setProgress(0)
-      setPoint("")
+      // setPoint("")
       setPreviousBtnBlock(true);
       setRightAns(false);
       setWrongAns(false);
@@ -119,7 +121,7 @@ const Welcome = () => {
 
   const reset = () => {
     setProgress(0)
-    setPoint("")
+    // setPoint("")
     setPreviousBtnBlock(true);
     setRightAns(false);
     setWrongAns(false);

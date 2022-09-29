@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useRef , useEffect } from 'react'
+import { useRef, useEffect } from 'react'
+
 
 
 const Leadboard = ({viewImg , setViewImg , reset , setGameStart}) => {
@@ -10,6 +11,8 @@ const Leadboard = ({viewImg , setViewImg , reset , setGameStart}) => {
       setViewImg(false)  
     } 
   }
+
+ 
 
 
     useEffect(() => {

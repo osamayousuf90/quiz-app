@@ -9,7 +9,7 @@ const initialState = {
     initialState,
     reducers: {
         increase: (state, action) => {
-        state.points = (action.payload);
+        state.points += action.payload;
       },
     }
     }
