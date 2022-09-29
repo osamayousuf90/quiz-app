@@ -49,15 +49,8 @@ const Welcome = () => {
   useEffect(() => {
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
       if (wrongAns && rightAns) {
-        // setViewImg(true)
-        console.log("no move this time")
-        setTimeout(() => {
-        setProgress(0)
-        clearInterval(interval)  
-        setRunning(false)
-        setViewImg(true)  
-        }, 2000)
-      }   
+        setViewImg(true)
+      } 
     } 
 
     if (rightAns && wrongAns) {     
@@ -70,22 +63,22 @@ const Welcome = () => {
   
 
   useEffect(() => {
-    if(progress >= 100) {
-      console.log("moved")
+    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
+      console.log("its to go now peacefully")
+      setTimeout(() => {
+      setProgress(0)
+      clearInterval(interval)  
+      setRunning(false)
+      setViewImg(true)  
+      }, 2000)
+    } else if (progress >= 100) {
+      console.log("time to move")
       clearInterval(interval);
       setProgress(0);
       next();
       setRunning(false)
-    } else if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      console.log("got you bitch")
-      setTimeout(() => {
-        console.log("got you bitch 2")
-        clearInterval(interval);
-        setProgress(0);
-        setRunning(false)
-      }, 3000) 
     }
-   }, [progress])
+   }, [running])
   
 
   // check ans is true or false
