@@ -53,7 +53,14 @@ const Welcome = () => {
       } 
     } 
 
-    if (rightAns && wrongAns) {     
+
+    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
+      setTimeout(() => {
+        next()
+      }, 5000)
+    } 
+
+    if (rightAns && wrongAns) { 
       setTimeout(() => {
        next()     
       }, 800)
@@ -64,31 +71,18 @@ const Welcome = () => {
 
   useEffect(() => {
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      console.log("its to go now peacefully")
       setTimeout(() => {
         setViewImg(true);
-        setProgress(0)
-        setPoint("")
-        setPreviousBtnBlock(true);
-        setRightAns(false);
-        setWrongAns(false);
-        setBtnBlocked(false);
-        setSelectedAns("");
-        setViewImg(false)
-        setQuestionNumber(1);
-        setQuestionIndex(QuizQuestion[0]);
-        setRunning(false)
+        clearInterval(interval)
       }, 5000)
     } else if (progress >= 100) {
-      console.log("time to move")
       clearInterval(interval);
       setProgress(0);
       next();
       setRunning(false)
     }
-   }, [progress])
+   }, [running])
   
-
   // check ans is true or false
   const checkIfTrue = (index) => {
     setRightAns(true);
@@ -123,20 +117,6 @@ const Welcome = () => {
     }
   };
 
-  // previous
-  const previous = () => {
-    if (questionNumber === 1) {
-      return false;
-    } else {
-      setRightAns(false);
-      setBtnBlocked(false);
-      setSelectedAns("");
-      setQuestionNumber((prev) => prev - 1);
-      setQuestionIndex((prev) => QuizQuestion[questionNumber - 1]);
-    }
-  };
-
-
   const reset = () => {
     setProgress(0)
     setPoint("")
@@ -148,7 +128,7 @@ const Welcome = () => {
     setViewImg(false)
     setQuestionNumber(1);
     setQuestionIndex(QuizQuestion[0]);
-    setRunning(false)
+    setRunning(true)
   }
 
   return (
