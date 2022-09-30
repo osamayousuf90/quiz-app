@@ -50,16 +50,18 @@ const Welcome = () => {
 
   useEffect(() => {
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      if (wrongAns && rightAns) {
-        setViewImg(true)
+      if (!wrongAns && !rightAns) {
+      setTimeout(() => {
+        setViewImg(true);
+      }, 5000)
       } 
     } 
 
 
     if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      setTimeout(() => {
-        next()
-      }, 5000)
+      if (wrongAns && rightAns) {
+          setViewImg(true);
+        } 
     } 
 
     if (rightAns && wrongAns) { 
@@ -70,21 +72,6 @@ const Welcome = () => {
 
   }, [rightAns, wrongAns]);
   
-
-  useEffect(() => {
-    if (questionNumber === QuizQuestion.length && questionNumber <= QuizQuestion.length) {
-      setTimeout(() => {
-        setViewImg(true);
-        // clearInterval(interval)
-      }, 5000)
-    } else if (progress >= 100) {
-      clearInterval(interval);
-      setProgress(0);
-      next();
-      setRunning(false)
-    }
-   }, [running])
-  
   // check ans is true or false
   const checkIfTrue = (index) => {
     setRightAns(true);
@@ -93,7 +80,7 @@ const Welcome = () => {
     setProgress(0);
     clearInterval(interval);
     setRunning(false)
-    dispatch(increase( point ))
+    dispatch(increase( 10 ))
     if (index === selectedAns) {
       setBtnBlocked(true);
       setRightAns(true);
