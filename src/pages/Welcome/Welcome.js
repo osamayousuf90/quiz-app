@@ -94,7 +94,9 @@ const Welcome = () => {
       return false;
     } else {
       setProgress(0)
-      // setPoint("")
+      setPoint("")
+      setRunning(false)
+      clearInterval(interval)
       setPreviousBtnBlock(true);
       setRightAns(false);
       setWrongAns(false);
@@ -102,7 +104,6 @@ const Welcome = () => {
       setSelectedAns("");
       setQuestionNumber((prev) => prev + 1);
       setQuestionIndex(() => QuizQuestion[questionNumber]);
-      setRunning(false)
     }
   };
 
